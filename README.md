@@ -1,5 +1,7 @@
 # test_for_ProninTeam
 Тестовое задание Backend Python (ProninTeam)
+![example workflow](https://github.com/margoloko/test_for_ProninTeam/blob/main/.github/workflow/workflow.yaml/badge.svg)
+
 ![python version](https://img.shields.io/badge/Python-3.11-green)
 ![django version](https://img.shields.io/badge/Django-5.0-green)
 ![djangorestframework version](https://img.shields.io/badge/DRF-3.14-green)
