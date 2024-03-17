@@ -1,23 +1,22 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 User = get_user_model()
-    
+
 
 class Event(models.TextChoices):
-    BIRTHDAY = 'Birthday', 'День рождения'
-    WEDDING = 'Wedding', 'Свадьба'
-    CHARITY = 'Charity', 'Благотворительность'
-    TRAVEL = 'Travel', 'Путешествие'
-    DATE = 'Date', 'Свидание'
-    EDUCATION = 'Education', 'Оплата обучения или курсов'
-    GIFT = 'Gift', 'Подарок'
-    SPORTS_EVENT = 'SportsEvent', 'Спортивное соревнование'
-    MEDICAL_TREATMENT = 'MedicalTreatment', 'Медицинское лечение'
-    DISASTER_RECOVERY = 'DisasterRecovery', 'Восстановление после бедствия'
-    OTHER = 'Other', 'Другое'
-     
+    BIRTHDAY = "Birthday", "День рождения"
+    WEDDING = "Wedding", "Свадьба"
+    CHARITY = "Charity", "Благотворительность"
+    TRAVEL = "Travel", "Путешествие"
+    DATE = "Date", "Свидание"
+    EDUCATION = "Education", "Оплата обучения или курсов"
+    GIFT = "Gift", "Подарок"
+    SPORTS_EVENT = "SportsEvent", "Спортивное соревнование"
+    MEDICAL_TREATMENT = "MedicalTreatment", "Медицинское лечение"
+    DISASTER_RECOVERY = "DisasterRecovery", "Восстановление после бедствия"
+    OTHER = "Other", "Другое"
+
 
 class Collect(models.Model):
     """Модель группового денежного сбора."""
@@ -35,4 +34,8 @@ class Collect(models.Model):
 
 class Payment(models.Model):
     """Модель платёжа для сбора."""
-    
+
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    collect = models.ForeignKey(Collect, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
