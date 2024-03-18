@@ -1,3 +1,6 @@
+from datetime import datetime as dt
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -24,12 +27,20 @@ class Collect(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     occasion = models.CharField(max_length=50, choices=Event.choices)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     goal = models.DecimalField(max_digits=10, decimal_places=2)
     current_sum = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    contributors = models.IntegerField()
-    cover = models.ImageField(upload_to="media/covers/")
-    deadline = models.DateTimeField()
+    cover = models.ImageField(upload_to="media/covers/", blank=True, null=True)
+    deadline = models.DateTimeField(default=dt.now() + timedelta(days=14))
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.title
+
+    class Meta:
+        verbose_name = "Денежный сбор"
+        verbose_name_plural = "Денежные сборы"
+        ordering = ["timestamp"]
 
 
 class Payment(models.Model):
@@ -39,3 +50,11 @@ class Payment(models.Model):
     collect = models.ForeignKey(Collect, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.collect} - {self.amount}"
+
+    class Meta:
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"
+        ordering = ["timestamp"]
