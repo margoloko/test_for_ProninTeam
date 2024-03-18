@@ -25,7 +25,7 @@ class Collect(models.Model):
     title = models.CharField(max_length=200)
     occasion = models.CharField(max_length=50, choices=Event.choices)
     description = models.TextField()
-    goal = models.DecimalField(max_digit=10, decimal_places=2)
+    goal = models.DecimalField(max_digits=10, decimal_places=2)
     current_sum = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     contributors = models.IntegerField()
     cover = models.ImageField(upload_to="media/covers/")
