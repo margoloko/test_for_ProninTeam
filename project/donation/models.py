@@ -64,7 +64,6 @@ class Collect(models.Model):
         verbose_name = "Денежный сбор"
         verbose_name_plural = "Денежные сборы"
         ordering = ["timestamp"]
-        help_text = "Модель для организации и управления групповыми сборами средств."
 
 
 class Payment(models.Model):
@@ -86,6 +85,3 @@ class Payment(models.Model):
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
         ordering = ["timestamp"]
-        help_text = (
-            "Модель для регистрации платежей, совершенных в рамках сбора средств."
-        )
