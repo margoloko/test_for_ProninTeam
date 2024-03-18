@@ -19,7 +19,7 @@ class CollectAdmin(admin.ModelAdmin):
         "goal",
         "deadline",
     )
-    readonly_fields = "timestamp"
+    readonly_fields = ("timestamp",)
     empty_value_display = "-пусто-"
 
 
@@ -31,5 +31,5 @@ class PaymentAdmin(admin.ModelAdmin):
     list_filter = ("user", "amount", "collect", "timestamp")
     search_fields = ("user", "amount", "collect", "timestamp")
     ordering = ("user", "amount", "collect", "timestamp")
-    readonly_fields = "timestamp"
+    readonly_fields = ("timestamp",)
     empty_value_display = "-пусто-"
